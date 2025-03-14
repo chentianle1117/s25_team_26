@@ -1,0 +1,87 @@
+# Dynamic 3D Research Paper Visualization Platform - Product Backlog
+
+## Functionalities
+
+### 1. Visualization and Interactivity
+
+#### 1.1 3D Paper Visualization
+- **Description:** Visually organize pre-cached papers (scraped from Google Scholar) and queried research papers into a 3D space.
+- **Details:**
+  - Papers are represented as dots.
+  - Dot positions are determined by quantifiable attributes (year published, citation count, paper length, bibliography length) mapped to the three axes.
+  - Dot color and size indicate qualitative attributes like topic, field of study, or publication type.
+
+#### 1.2 Metadata-based Paper Filtering
+- **Description:** Filter papers based on various attributes and metadata in the viewport.
+- **Details:**
+  - Support multiple filtering conditions simultaneously.
+  - Limit the number of visible papers to prevent visual clutter and maintain web performance.
+
+#### 1.3 Attribute Representation Customization
+- **Description:** Allow users to change which specific attributes are represented via dropdown menus.
+- **Details:**
+  - Users can select attributes for the three axes.
+  - Users can choose which attributes control dot color and size.
+
+#### 1.4 Citation Network Visualization
+- **Description:** Enable interactive exploration of citation networks within the 3D space.
+- **Details:**
+  - Users can rotate the 3D space and hover/click on specific papers.
+  - Interaction highlights linked papers (via citations) with colored lines.
+  - A slider bar adjusts the number of citation layers (children and parents) visualized.
+
+#### 1.5 Paper Details Side Panel
+- **Description:** Display a side panel when a paper is clicked.
+- **Details:**
+  - Show comprehensive metadata stored in the database.
+  - Include parent and child linkages for the selected paper.
+  - Provide detailed information without leaving the visualization view.
+
+### 2. Customization After User Login
+
+#### 2.1 Paper Collection and Organization
+- **Description:** Enable users to collect and organize papers.
+- **Details:**
+  - Allow users to star selected papers and store them in a "favorite" folder with custom tags.
+  - Provide a separate tab or window to view all collected favorite papers.
+  - Highlight starred papers in the 3D space for easy identification.
+
+#### 2.2 Paper Addition via URL
+- **Description:** Allow users to add new papers by entering a URL.
+- **Details:**
+  - Functionality similar to Zotero’s Chrome extension.
+  - Automatically extract appropriate metadata from the provided URL.
+  - Add the paper to the database, establish linkages with pre-cached papers, and mark it as newly added.
+
+## Technical Components
+
+### 3. Data Management
+
+#### 3.1 Paper Data Import and Processing
+- **Description:** Import and process research paper data from external sources.
+- **Details:**
+  - Support JSON files and Excel spreadsheets.
+  - Validate required fields during the import process.
+
+#### 3.2 Citation Network Mapping
+- **Description:** Map and maintain citation relationships between papers.
+- **Details:**
+  - Create and update relationships based on citations.
+  - Support the visualization of academic connections.
+
+#### 3.3 Paper Metadata Storage
+- **Description:** Store comprehensive metadata for each paper.
+- **Details:**
+  - Include title, authors, publication date, abstract, keywords, citation metrics, and additional attributes necessary for visualization.
+
+### 4. User Account Management
+
+#### 4.1 User Authentication
+- **Description:** Implement secure login functionality.
+- **Details:**
+  - Enable personalized features such as paper collections and saved preferences.
+
+#### 4.2 User Preferences Storage
+- **Description:** Save user-specific settings.
+- **Details:**
+  - Maintain visualization preferences, collections, and custom views between sessions.

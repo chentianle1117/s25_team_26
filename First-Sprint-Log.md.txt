@@ -1,0 +1,44 @@
+# First Sprint Log
+
+## Product Owner
+- **David Chen (davich2)**
+
+## Team Roles and Responsibilities
+
+### David
+- **Project/Sprint Backlog:**
+  - Create a comprehensive project backlog based on the product backlog.
+  - Organize and refine the list of functionalities.
+  - Confirm and finalize the sprint backlog with the team.
+- **Coordination:**
+  - Facilitate a team meeting to review the backlog.
+  - Document priorities and dependencies for this sprint.
+
+### Graham
+- **Data Scraping & Import:**
+  - Experiment with scraping 10 research papers from Google Scholar (or an equivalent source).
+  - Store the scraped data in Excel or JSON format.
+- **Database Setup:**
+  - Set up the Django project with SQL integration.
+  - Define the paper model in `models.py` with the appropriate fields.
+  - Ensure the database connection and data storage are functioning as expected.
+
+### Sheen
+- **Interface Prototyping:**
+  - Develop initial sketches and HTML mockups for the user interface.
+  - Leverage existing three.js code snippets for visualizing datapoints in a 3D space.
+  - Create preliminary prototypes that incorporate key features such as 3D visualization, filtering, and interactive elements.
+- **Design Review:**
+  - Present the sketches and HTML prototypes to the team for feedback.
+
+## Sprint Objectives
+- Establish a clear and organized project and sprint backlog.
+- Validate initial data scraping and database setup.
+- Develop preliminary UI/UX prototypes to guide further development.
+
+## Deliverables
+- **David:** A finalized project and sprint backlog document.
+- **Graham:** A working prototype demonstrating:
+  - Data scraping of 10 papers saved in Excel/JSON.
+  - A basic Django setup with SQL and an initial `models.py`.
+- **Sheen:** Preliminary sketches and HTML mockups showcasing the 3D interface design.
