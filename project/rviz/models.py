@@ -26,3 +26,7 @@ class ResearchPaper(models.Model):
 
 	### Zotero ###
 	zotero_id = models.CharField(max_length=255, blank=True, null=True)
+
+
+	# dummy data
+	# format to something acceptable by the front end
