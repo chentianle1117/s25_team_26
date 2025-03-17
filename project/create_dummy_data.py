@@ -1,8 +1,16 @@
+import os
+import sys
+import django
 import random
 from datetime import date, timedelta
-from django.test import TestCase, Client
-from django.urls import reverse
-from rviz.models import ResearchPaper, Author  # Use absolute imports
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "team26.settings")
+
+django.setup()
+
+from rviz.models import Author, ResearchPaper
 
 
 def create_dummy_data(num_authors=5, num_papers=10):
@@ -61,14 +69,6 @@ def create_dummy_data(num_authors=5, num_papers=10):
 				print(f"Added {len(citations)} citations to {paper.title}")
 
 
-class ViewsTestCase(TestCase):
-	def setUp(self):
-		self.client = Client()
-		self.paper = ResearchPaper.objects.create(title="Test Paper")
-
-	def test_get_relational_data(self):
-		# Import view function inside test method to prevent import issues
-		from rviz.views import get_relational_data
-		create_dummy_data()
-		result = get_relational_data()
-		self.assertIsNotNone(result)
+if __name__ == '__main__':
+	create_dummy_data()
+	print("Done creating dummy data")
