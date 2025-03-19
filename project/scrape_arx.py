@@ -16,24 +16,7 @@ django.setup()
 
 import time
 from rviz.models import ResearchPaper, Author
-
-# Create your views here.
-def scrape_arxiv(arxiv_id):
-	"""
-	Using the id of a paper from arxiv, scrape it and save it to the database
-	"""
-	pass
-
-def get_relational_data():
-	# through model contains the relationships between objects in db
-	citation_model = ResearchPaper.citations.through
-	citations = citation_model.objects.all()
-
-	citation_pairs = citation_model.objects.values_list('from_researchpaper_id', 'to_researchpaper_id')
-	for parent, child in citation_pairs:
-		print(f"parent: {parent}, child: {child}")
-	print(f"citation relations: {citation_pairs}, obj: {type(citation_pairs)}")
-	return citation_pairs
+import argparse
 
 def scrape_arxiv_paper(arxiv_id):
 	api_url = f"http://export.arxiv.org/api/query?id_list={arxiv_id}"
@@ -53,6 +36,8 @@ def scrape_arxiv_paper(arxiv_id):
 		if not entry:
 			print(f"No paper found with id: {arxiv_id}")
 			return None
+		else:
+			print(f"Full entry:\n{entry}")
 
 		title = entry.find("atom:title", ns).text.strip()
 		print(f"Article title: {title}")
@@ -72,16 +57,16 @@ def scrape_arxiv_paper(arxiv_id):
 		print(f"article url: {url}")
 
 		# TODO: add paper to DB, for now just get data
-		# paper, created = ResearchPaper.objects.update_or_create(
-		# 	doi=doi if doi else f"arxiv:{arxiv_id}",
-		# 	defaults={
-		# 		'title': title,
-		# 		'abstract': abstract,
-		# 		'publication_date': publication_date,
-		# 		'url': url,
-		# 		'source_site': 'arxiv'
-		# 	}
-		# )
+		paper, created = ResearchPaper.objects.update_or_create(
+			doi=doi if doi else f"arxiv:{arxiv_id}",
+			defaults={
+				'title': title,
+				'publication_date': publication_date,
+				'url': url,
+			}
+		)
+
+		print(f"paper: {paper}")
 
 		# Extract and add authors
 		author_elements = entry.findall('atom:author', ns)
@@ -104,41 +89,13 @@ def scrape_arxiv_paper(arxiv_id):
 
 	return None
 
-""" FORMATTING
-def get edges from db:
-	# query the edges and relationship from postgre
-
-def send edges:
-	# array of relationships to front end
-	# 		must be k, v pair
-	
-def send papers:
-	# general query  from DB
-"""
-
-""" CONTROLS FOR FRONT END
-def init load:
-	# loads a discrete num of papers from DB
-	
-def filter:
-	# post req for filtering data
-
-def upload:
-	# post req for adding papers
-"""
-
-""" LATER
-def parse uploaded paper:
-	# finds citations, etc
-"""
-
-# add quants to models
-# add function to query database for sheen
-
-# fix git connection
-
-def main():
-	get_relational_data()
-
 if __name__ == '__main__':
-	main()
+	parser = argparse.ArgumentParser()
+	parser.add_argument(
+		'--id',
+		help="enter the arxiv id of the article to scrape",
+		type=str,
+	)
+	args = parser.parse_args()
+	print(f"Attempting to scrape paper with Arxiv ID: {args.id}")
+	scrape = scrape_arxiv_paper(args.id)
